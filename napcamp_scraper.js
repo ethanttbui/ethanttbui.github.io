@@ -1,6 +1,7 @@
 const campsiteIds = [12187, 10789, 14528, 12252]
 const startDate = "2021-6-28"
 const endDate = "2021-6-29"
+const corsProxyUrl = "https://cors-anywhere.herokuapp.com/"
 
 $(document).ready(function(){
 
@@ -16,14 +17,15 @@ $(document).ready(function(){
 
 	for (id of campsiteIds) {
 		(function(id) {
-			$.get(`https://www.nap-camp.com/api/campsite/${id}`, function (campsite) {
+			var campsiteUrl = `${corsProxyUrl}https://www.nap-camp.com/api/campsite/${id}`
+			$.get(campsiteUrl, function (campsite) {
 				$("#container").append(
 					`<button type="button" class="collapsible">${campsite.name}</button>`,
 					`<div id="${id}" class="content">`,
 					`</div><br/><br/>`
 				)
 
-				var planSearchUrl = `https://www.nap-camp.com/api/campsite/${id}/plans?check_in=${startDate}&check_out=${endDate}`
+				var planSearchUrl = `${corsProxyUrl}https://www.nap-camp.com/api/campsite/${id}/plans?check_in=${startDate}&check_out=${endDate}`
 				$.get(planSearchUrl, function (plans) {
 					for (const plan of plans.list) {
 						var planDetailUrl = `https://www.nap-camp.com/${campsite.prefecture_name_en}/${id}/plans/${plan.id}`
