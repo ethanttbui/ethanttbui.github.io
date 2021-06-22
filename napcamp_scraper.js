@@ -33,7 +33,10 @@ $(document).ready(function(){
 					for (const plan of plans.list) {
 						var planDetailUrl = `https://www.nap-camp.com/${campsite.prefecture_name_en}/${id}/plans/${plan.id}`
 						$(`#${id}`).append(
-							`<p> Plan: ${plan.site_name} - Price: ${plan.price.guideline} - <a href="${planDetailUrl}">See in nap-camp</a></p>`
+							`<p><b>Plan</b>: ${plan.site_name} / 
+							<b>Capacity</b>: ${plan.basic_info.site_num} people / 
+							<b>Price</b>: ${plan.price.guideline} / 
+							<a href="${planDetailUrl}">See in nap-camp</a></p>`
 						)
 					}
 				})
