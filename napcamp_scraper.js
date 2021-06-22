@@ -1,7 +1,7 @@
 const campsiteIds = [12187, 10789, 12252, 11775, 10169]
 const startDate = "2021-8-14"
 const endDate = "2021-8-15"
-const corsProxyUrl = "http://ethan-cors-proxy.herokuapp.com/"
+const corsProxyUrl = "https://ethan-cors-proxy.herokuapp.com/"
 
 $(document).ready(function(){
 
