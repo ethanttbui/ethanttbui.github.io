@@ -27,6 +27,9 @@ $(document).ready(function(){
 
 				var planSearchUrl = `${corsProxyUrl}https://www.nap-camp.com/api/campsite/${id}/plans?check_in=${startDate}&check_out=${endDate}`
 				$.get(planSearchUrl, function (plans) {
+					if (typeof plans.list === "undefined") {
+						return
+					}
 					for (const plan of plans.list) {
 						var planDetailUrl = `https://www.nap-camp.com/${campsite.prefecture_name_en}/${id}/plans/${plan.id}`
 						$(`#${id}`).append(
