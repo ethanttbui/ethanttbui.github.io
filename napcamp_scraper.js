@@ -20,19 +20,21 @@ $(document).ready(function(){
 			var campsiteUrl = `${corsProxyUrl}https://www.nap-camp.com/api/campsite/${id}`
 			$.get(campsiteUrl, function (campsite) {
 				$("#container").append(
-					`<button type="button" class="collapsible">${campsite.name}</button>`,
-					`<div id="${id}" class="content">`,
+					`<button id="campsite_${id}" type="button" class="collapsible">${campsite.name}</button>`,
+					`<div id="plans_${id}" class="content">`,
 					`</div><br/><br/>`
 				)
 
 				var planSearchUrl = `${corsProxyUrl}https://www.nap-camp.com/api/campsite/${id}/plans?check_in=${startDate}&check_out=${endDate}`
 				$.get(planSearchUrl, function (plans) {
 					if (typeof plans.list === "undefined") {
+						$(`#campsite_${id}`).append(` (reservation unavailable)`)
 						return
 					}
+					$(`#campsite_${id}`).append(` (${plans.list.length} plans available)`)
 					for (const plan of plans.list) {
 						var planDetailUrl = `https://www.nap-camp.com/${campsite.prefecture_name_en}/${id}/plans/${plan.id}`
-						$(`#${id}`).append(
+						$(`#plans_${id}`).append(
 							`<p><b>Plan</b>: ${plan.site_name} / 
 							<b>Capacity</b>: ${plan.basic_info.site_num} people / 
 							<b>Price</b>: ${plan.price.guideline} / 
